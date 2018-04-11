@@ -7,7 +7,6 @@ using namespace std;
 struct ListItem
 {
     int Value;
-    ListItem* Prev;
     ListItem* Next;
 };
 
@@ -35,7 +34,8 @@ void Remove(List& L, const ListItem* ItemToRemove);
 void Clear(List& L);
 
 ListItem* Search(const List& L, const int Value);
-ListItem* ReverseSearch(const List& L, const int Value);
+ListItem* SearchOneBefore(const List& L, const int Value);
+ListItem* SearchOneBeforeTheLast(const List& L);
 
 bool Contains(const List& L, const int Value);
 
