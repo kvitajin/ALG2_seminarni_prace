@@ -105,7 +105,7 @@ void RemoveFirst(List& L)
     }
 }
 
-void RemoveLast(List& L)                                                //todo SIGFAULT!!!
+void RemoveLast(List& L)
 {
     if (!IsEmpty(L))
     {
@@ -248,7 +248,7 @@ void InternalRemove(List& L, const ListItem* ItemToDelete)
         {
             if (ItemToDelete == L.Tail)
             {
-                L.Tail=SearchOneBeforeTheLast(L);                                //todo napojeni predesleho// asi done??? otestovat
+                L.Tail=SearchOneBeforeTheLast(L);
                 L.Tail->Next = nullptr;
 
             }
