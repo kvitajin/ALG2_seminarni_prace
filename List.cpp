@@ -37,12 +37,9 @@ void Prepend(List& L, const int NewValue)
     }
     else
     {
-                                                                     //po sem asi beze zmeny
-
         auto* NewItem = new ListItem;
         NewItem->Value = NewValue;
         NewItem->Next = L.Head;
-        L.Head->Prev = NewItem;
         L.Head = NewItem;
     }
 }
@@ -58,7 +55,7 @@ void Append(List& L, const int NewValue)
         auto* NewItem = new ListItem;
         NewItem->Value = NewValue;
         NewItem->Next = nullptr;
-        L.Tail->Next = NewItem;             //todo zde byl odmazan radek, pokud nebude fungovat, vratit
+        L.Tail->Next = NewItem;
         L.Tail = NewItem;
     }
 }
@@ -108,7 +105,7 @@ void RemoveFirst(List& L)
     }
 }
 
-void RemoveLast(List& L)
+void RemoveLast(List& L)                                                //todo SIGFAULT!!!
 {
     if (!IsEmpty(L))
     {
@@ -163,8 +160,8 @@ ListItem* Search(const List& L, const int Value)
     return nullptr;
 }
 ListItem* SearchOneBefore(const List& L, const int Value){
-    ListItem* q;
-    q->Next= nullptr;
+    ListItem* q= nullptr;
+    //q->Next= nullptr;
     for (ListItem* p = L.Head; p != nullptr; p = p->Next)
     {
         if (p->Value == Value)
@@ -176,9 +173,9 @@ ListItem* SearchOneBefore(const List& L, const int Value){
     return nullptr;
 }
 ListItem* SearchOneBeforeTheLast(const List& L){
-    ListItem* q;
-    q->Next= nullptr;
-    for (ListItem* p = L.Head; p != nullptr; p = p->Next){
+    ListItem* q= nullptr;
+    //q->Next= nullptr;
+    for (ListItem* p = L.Head; p->Next   != nullptr; p = p->Next){
         q=p;
     }
     return q;
@@ -253,15 +250,13 @@ void InternalRemove(List& L, const ListItem* ItemToDelete)
             {
                 L.Tail=SearchOneBeforeTheLast(L);                                //todo napojeni predesleho// asi done??? otestovat
                 L.Tail->Next = nullptr;
+
             }
             else
             {
-                ListItem* N= ItemToDelete->Next; //todo
+                ListItem* P=SearchOneBefore(L, ItemToDelete->Value);
+                P->Next=ItemToDelete->Next;
 
-                /*ListItem* P = ItemToDelete->Prev;
-                ListItem* N = ItemToDelete->Next;
-                P->Next = N;
-                N->Prev = P;*/
             }
         }
     }
