@@ -131,7 +131,6 @@ void RemoveAll(List& L, const int ValueToRemove)
     }
 }
 
-
 void Remove(List& L, const ListItem* ItemToRemove)
 {
     if (ItemToRemove != nullptr)
@@ -161,7 +160,6 @@ ListItem* Search(const List& L, const int Value)
 }
 ListItem* SearchOneBefore(const List& L, const int Value){
     ListItem* q= nullptr;
-    //q->Next= nullptr;
     for (ListItem* p = L.Head; p != nullptr; p = p->Next)
     {
         if (p->Value == Value)
@@ -174,12 +172,10 @@ ListItem* SearchOneBefore(const List& L, const int Value){
 }
 ListItem* SearchOneBeforeTheLast(const List& L){
     ListItem* q= nullptr;
-    //q->Next= nullptr;
     for (ListItem* p = L.Head; p->Next   != nullptr; p = p->Next){
         q=p;
     }
     return q;
-
 }
 
 bool Contains(const List& L, const int Value)
@@ -250,13 +246,11 @@ void InternalRemove(List& L, const ListItem* ItemToDelete)
             {
                 L.Tail=SearchOneBeforeTheLast(L);
                 L.Tail->Next = nullptr;
-
             }
             else
             {
                 ListItem* P=SearchOneBefore(L, ItemToDelete->Value);
                 P->Next=ItemToDelete->Next;
-
             }
         }
     }
